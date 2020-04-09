@@ -1,0 +1,70 @@
+@font-face {
+    font-family: 'PingFang Bold';
+    src:url('../fonts/PingFang/PingFang Bold.ttf')
+}@font-face {
+    font-family: 'PingFang Light';
+    src:url('../fonts/PingFang/PingFang Light.ttf')
+}@font-face {
+    font-family: 'PingFang Medium';
+    src:url('../fonts/PingFang/PingFang Medium.ttf')
+}@font-face {
+    font-family: 'PingFang Regular';
+    src:url('../fonts/PingFang/PingFang Regular.ttf')
+}
+
+@font-face {
+    font-family: 'System San Francisco Display Bold';
+    src:url('../fonts/SanFrancisco/System San Francisco Display Bold.ttf')
+}@font-face {
+    font-family: 'System San Francisco Display Medium';
+    src:url('../fonts/SanFrancisco/System San Francisco Display Medium.ttf')
+}@font-face {
+    font-family: 'System San Francisco Display Regular';
+    src:url('../fonts/SanFrancisco/System San Francisco Display Regular.ttf')
+}@font-face {
+    font-family: 'System San Francisco Display Thin';
+    src:url('../fonts/SanFrancisco/System San Francisco Display Thin.ttf')
+}@font-face {
+    font-family: 'System San Francisco Display Ultralight';
+    src:url('../fonts/SanFrancisco/System San Francisco Display Ultralight.ttf')
+}
+
+@font-face {
+    font-family: 'System San Francisco Text Bold';
+    src:url('../fonts/SanFrancisco/System San Francisco Text Bold.ttf')
+}@font-face {
+    font-family: 'System San Francisco Text Heavy';
+    src:url('../fonts/SanFrancisco/System San Francisco Text Heavy.ttf')
+}@font-face {
+    font-family: 'System San Francisco Text Medium';
+    src:url('../fonts/SanFrancisco/System San Francisco Text Medium.ttf')
+}@font-face {
+    font-family: 'System San Francisco Text Regular';
+    src:url('../fonts/SanFrancisco/System San Francisco Text Regular.ttf')
+}@font-face {
+    font-family: 'System San Francisco Text Thin';
+    src:url('../fonts/SanFrancisco/System San Francisco Text Thin.ttf')
+}
+
+@font-face {
+    font-family: 'NotoSansCJK-Black-7';
+    src:url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Black-7.otf')
+}@font-face {
+    font-family: 'NotoSansCJK-Bold-6';
+    src:url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Bold-6.otf')
+}@font-face {
+    font-family: 'NotoSansCJK-DemiLight-4';
+    src:url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-DemiLight-4.otf')
+}@font-face {
+    font-family: 'NotoSansCJK-Light-3';
+    src:url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Light-3.otf')
+}@font-face {
+    font-family: 'NotoSansCJK-Medium-5';
+    src:url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Medium-5.otf')
+}@font-face {
+    font-family: 'NotoSansCJK-Regular-1';
+    src:url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Regular-1.otf')
+}@font-face {
+    font-family: 'NotoSansCJK-Thin-2';
+    src:url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Thin-2.otf')
+}

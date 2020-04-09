@@ -1,0 +1,43 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "蔬果坊"
+			}
+		},
+		{
+			"path": "pages/list/index",
+			"style": {
+				"navigationBarTitleText": "蔬果坊-列表"
+			}
+		},
+		{
+			"path": "pages/commodity/index",
+			"style": {
+				"navigationBarTitleText": "蔬果坊-商品"
+			}
+		},
+		{
+			"path": "pages/shoppingCart/index",
+			"style": {
+				"navigationBarTitleText": "蔬果坊-购物车"
+			}
+		},
+		{
+			"path": "pages/order/index",
+			"style": {
+				"navigationBarTitleText": "蔬果坊-订单"
+			}
+		},
+		{
+			"path": "pages/setting/index",
+			"style": {
+				"navigationBarTitleText": "蔬果坊-设置"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationStyle": "custom"
+	}
+}
