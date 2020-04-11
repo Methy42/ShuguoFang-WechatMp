@@ -1,7 +1,10 @@
 <template>
   <view class="app">
     <view :class="'header ' + classObject.header">
-      <view class="title" v-bind:style="{ fontSize: styleObject.title.fontSize + 'px', marginTop: styleObject.title.marginTop + 'px' }">
+      <view
+        class="title"
+        v-bind:style="{ fontSize: styleObject.title.fontSize + 'px', marginTop: styleObject.title.marginTop + 'px' }"
+      >
         <view v-if="activeTab === 'home'">
           <view class="title-wrapper">
             <img src="/static/images/system/logo.png" />
@@ -24,41 +27,44 @@
           </view>
         </view>
         <view v-if="activeTab === 'mine'">
-          <view class="mine-title" :style="{ lineHeight: styleObject.title.marginTop > 15 ? (styleObject.title.marginTop + 25) + 'px' : '40px' }">
+          <view
+            class="mine-title"
+            :style="{ lineHeight: styleObject.title.marginTop > 15 ? (styleObject.title.marginTop + 25) + 'px' : '40px' }"
+          >
             <img
               src="/static/images/avatar/8f692bb4852376870f88d2f561ff6fe7.png"
-              v-bind:style="{ height: styleObject.title.marginTop > 15 ? (styleObject.title.marginTop + 25) + 'px' : '40px' }"
+              v-bind:style="{ height: styleObject.title.marginTop > 15 ? (styleObject.title.marginTop + 25) + 'px' : '40px', width: styleObject.title.marginTop > 15 ? (styleObject.title.marginTop + 25) + 'px' : '40px' }"
             />
             <text>METHY</text>
           </view>
         </view>
       </view>
     </view>
-    <view class="main" ref="mainDiv">
+    <scroll-view class="main" scroll-y @scroll="onMainViewScroll">
       <home v-if="activeTab === 'home'" />
       <search v-if="activeTab === 'search'" />
       <history-order v-if="activeTab === 'HistoryOrder'" />
       <mine v-if="activeTab === 'mine'" />
-    </view>
+    </scroll-view>
     <view class="footer">
       <view :class="'tab ' + (activeTab === 'home' ? 'active' : '')">
         <view @click="setActiveTab('home')">
-          <i class="icon iconfont icon-shop"></i>
+          <span class="icon iconfont icon-shop"></span>
         </view>
       </view>
       <view :class="'tab ' + (activeTab === 'search' ? 'active' : '')">
         <view @click="setActiveTab('search')">
-          <i class="icon iconfont icon-search"></i>
+          <span class="icon iconfont icon-search"></span>
         </view>
       </view>
       <view :class="'tab ' + (activeTab === 'HistoryOrder' ? 'active' : '')">
         <view @click="setActiveTab('HistoryOrder')">
-          <i class="icon iconfont icon-ticket"></i>
+          <span class="icon iconfont icon-ticket"></span>
         </view>
       </view>
       <view :class="'tab ' + (activeTab === 'mine' ? 'active' : '')">
         <view @click="setActiveTab('mine')">
-          <i class="icon iconfont icon-people"></i>
+          <span class="icon iconfont icon-people"></span>
         </view>
       </view>
     </view>
@@ -94,25 +100,21 @@ export default {
       scrollEventList: []
     };
   },
-  mounted: function() {
-    // 请允许我最后操作一次DOM
+  onPageScroll() {
+    console.log("scroll");
+  },
+  mounted() {
     this.setHeaderSize();
-    var that = this;
-    document
-      .getElementsByClassName("main")[0]
-      .addEventListener("scroll", () => {
-        var t = document.getElementsByClassName("main")[0].scrollTop;
-        that.scrollEventList.forEach(function(event) {
-          event(t);
-        });
-      });
     this.postUserInfo();
   },
   methods: {
+    onMainViewScroll(event) {
+      var t = event.detail.scrollTop;
+      this.scrollEventList.forEach(function(event) {
+        event(t);
+      });
+    },
     setHeaderSize: function() {
-      var header = document.getElementsByClassName("header")[0];
-      var title = header.children[0];
-      var width = header.width;
       var margin_top = 50;
       var font_size = 28;
       var min_height = 50;
@@ -125,12 +127,12 @@ export default {
         }
         if (t != 0) {
           _this.classObject.header = "up";
-        }else{
+        } else {
           _this.classObject.header = "";
         }
-        if (t < 32){
-          _this.styleObject.title.fontSize = font_size - (t/4);
-        }else{
+        if (t < 32) {
+          _this.styleObject.title.fontSize = font_size - t / 4;
+        } else {
           _this.styleObject.title.fontSize = font_size - 8;
         }
       }

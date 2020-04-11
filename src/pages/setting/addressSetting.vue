@@ -2,7 +2,7 @@
   <view class="container" style="padding-bottom: 100px;">
     <view class="layout_block">
       <view class="layout_title">
-        <i class="iconfont icon-home"></i>
+        <span class="iconfont icon-home"></span>
         <span style="margin-left: 5px;">收货地址设置</span>
       </view>
       <view class="content">
@@ -18,7 +18,7 @@
             </view>
             <view class="actionbox">
               <text class="message" style="color: #4395ff" @tap="showaddressPopup">
-                <i class="iconfont icon-edit"></i>
+                <span class="iconfont icon-edit"></span>
                 <span style="margin-left: 5px;">更换</span>
               </text>
             </view>
@@ -31,7 +31,7 @@
             </view>
             <view class="actionbox">
               <text class="message" style="color: #4395ff" @tap="showaddressDrawer">
-                <i class="iconfont icon-edit"></i>
+                <span class="iconfont icon-edit"></span>
                 <span style="margin-left: 5px;">更换</span>
               </text>
             </view>
@@ -44,7 +44,7 @@
             </view>
             <view class="actionbox">
               <text class="message" style="color: #4395ff" @tap="showaddressDrawer">
-                <i class="iconfont icon-edit"></i>
+                <span class="iconfont icon-edit"></span>
                 <span style="margin-left: 5px;">更换</span>
               </text>
             </view>
@@ -55,7 +55,7 @@
     <view class="shopping-cart-action">
       <button class="cancel-btn">取消</button>
       <button class="take-btn" @click="toMakeOrderPage">
-        <i class="iconfont icon-check"></i>
+        <span class="iconfont icon-check"></span>
         <span style="margin-left: 5px;">确定</span>
       </button>
     </view>

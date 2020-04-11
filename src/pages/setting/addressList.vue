@@ -2,11 +2,11 @@
   <view class="container">
     <view class="layout_block">
       <view class="layout_title">
-        <i class="iconfont icon-ticket"></i>
-        我的收货地址
+        <span class="iconfont icon-ticket"></span>
+        <span style="margin-left: 5px;">我的收货地址</span>
         <view class="tool">
           <a href="javascript:;" class="setting">
-            <i class="iconfont icon-plus"></i>
+            <span class="iconfont icon-plus"></span>
             <span style="margin-left: 5px;">新增地址</span>
           </a>
         </view>
@@ -24,11 +24,11 @@
             </view>
             <view class="actionbox">
               <text class="message" style="color: #f00" @tap="deleteConfirmPopupShow">
-                <i class="iconfont icon-cancel"></i>
+                <span class="iconfont icon-cancel"></span>
                 <span style="margin-left: 5px;">删除</span>
               </text>
               <text class="message" style="color: #4395ff; margin-left: 15px;" @tap="toSettingPage('addressSetting')">
-                <i class="iconfont icon-setting"></i>
+                <span class="iconfont icon-setting"></span>
                 <span style="margin-left: 5px;">修改</span>
               </text>
             </view>
@@ -55,49 +55,49 @@ export default {
         {
           id: "1",
           name: "欧阳先生",
-          address: "江苏南京市建邺区沙州街道金穗花园1栋1703",
+          address: "湖北武汉市汉口区麒麟街道日光花园1栋2504",
           telephone: "18795893760"
         },
         {
           id: "2",
           name: "黄先生",
-          address: "新疆哈密市伊州区哈建小区203栋3单元202",
+          address: "四川巴中市巴中区巴中小区123栋3单元2504",
           telephone: "18795893760"
         },
         {
           id: "3",
           name: "欧阳先生",
-          address: "江苏南京市建邺区沙州街道金穗花园1栋1703",
+          address: "湖北武汉市汉口区麒麟街道日光花园1栋2504",
           telephone: "18795893760"
         },
         {
           id: "4",
           name: "黄先生",
-          address: "新疆哈密市伊州区哈建小区203栋3单元202",
+          address: "四川巴中市巴中区巴中小区123栋3单元2504",
           telephone: "18795893760"
         },
         {
           id: "5",
           name: "欧阳先生",
-          address: "江苏南京市建邺区沙州街道金穗花园1栋1703",
+          address: "湖北武汉市汉口区麒麟街道日光花园1栋2504",
           telephone: "18795893760"
         },
         {
           id: "6",
           name: "黄先生",
-          address: "新疆哈密市伊州区哈建小区203栋3单元202",
+          address: "四川巴中市巴中区巴中小区123栋3单元2504",
           telephone: "18795893760"
         },
         {
           id: "7",
           name: "欧阳先生",
-          address: "江苏南京市建邺区沙州街道金穗花园1栋1703",
+          address: "湖北武汉市汉口区麒麟街道日光花园1栋2504",
           telephone: "18795893760"
         },
         {
           id: "8",
           name: "黄先生",
-          address: "新疆哈密市伊州区哈建小区203栋3单元202",
+          address: "四川巴中市巴中区巴中小区123栋3单元2504",
           telephone: "18795893760"
         }
       ]

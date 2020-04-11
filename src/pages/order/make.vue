@@ -2,7 +2,7 @@
   <view class="container" style="padding-bottom: 100px;">
     <view class="layout_block">
       <view class="layout_title">
-        <i class="iconfont icon-home"></i>
+        <span class="iconfont icon-home"></span>
         <span style="margin-left: 5px;">收货地址时间</span>
       </view>
       <view class="content">
@@ -18,7 +18,7 @@
             </view>
             <view class="actionbox">
               <text class="message" style="color: #4395ff" @tap="showaddressDrawer">
-                <i class="iconfont icon-edit"></i>
+                <span class="iconfont icon-edit"></span>
                 <span style="margin-left: 5px;">更换</span>
               </text>
             </view>
@@ -31,7 +31,7 @@
             </view>
             <view class="actionbox">
               <text class="message" style="color: #4395ff">
-                <i class="iconfont icon-edit"></i>
+                <span class="iconfont icon-edit"></span>
                 <span style="margin-left: 5px;">修改</span>
               </text>
             </view>
@@ -41,7 +41,7 @@
     </view>
     <view class="layout_block">
       <view class="layout_title">
-        <i class="iconfont icon-box"></i>
+        <span class="iconfont icon-box"></span>
         <span style="margin-left: 5px;">商品及包装</span>
       </view>
       <view class="content">

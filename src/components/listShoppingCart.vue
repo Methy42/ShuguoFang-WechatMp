@@ -1,7 +1,7 @@
 <template>
   <view class="shopping-cart-wrapper">
     <button @click="toShoppingCartPage('common')">
-      <i class="iconfont icon-trolley"></i>
+      <span class="iconfont icon-trolley"></span>
     </button>
     <view class="tag">3</view>
   </view>

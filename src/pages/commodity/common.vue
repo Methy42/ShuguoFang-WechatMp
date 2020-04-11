@@ -1,7 +1,7 @@
 <template>
   <view class="container">
     <view class="layout_today">
-      <view class="card" style="position: relative;">
+      <view class="card swiper" style="position: relative;">
         <swiper
           class="swiper"
           :indicator-dots="true"

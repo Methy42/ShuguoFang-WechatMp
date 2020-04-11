@@ -158,7 +158,7 @@
     <view class="shopping-cart-action">
       <button class="remove-btn">移出购物车</button>
       <button class="take-btn" @click="toMakeOrderPage">
-        <i class="iconfont icon-pay"></i>
+        <span class="iconfont icon-pay"></span>
         <span style="margin-left: 5px;">去结算</span>
       </button>
     </view>

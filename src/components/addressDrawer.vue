@@ -3,12 +3,12 @@
     <view style="padding:15px;">
       <view class="layout_block">
         <view class="layout_title">
-          <i class="iconfont icon-ticket"></i>
-          请选择收货地址
+          <span class="iconfont icon-ticket"></span>
+          <span style="margin-left">请选择收货地址</span>
           <view class="tool">
             <a href="javascript:;" class="setting">
-              <i class="iconfont icon-setting"></i>
-              <span style="margin-left: 5px;">管理</span>
+              <text class="iconfont icon-setting"></text>
+              <text style="margin-left">管理</text>
             </a>
           </view>
         </view>

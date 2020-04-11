@@ -2,11 +2,11 @@
   <view class="container">
     <view class="layout_block">
       <view class="layout_title">
-        <i class="iconfont icon-ticket"></i>
-        我的收货地址
+        <span class="iconfont icon-ticket"></span>
+        <span style="margin-left: 5px;">我的收货地址</span>
         <view class="tool">
           <a href="javascript:;" class="more" @tap="toSettingPage('addressList')">
-            <i class="iconfont icon-menu"></i>
+            <span class="icon iconfont icon-menu"></span>
             <span style="margin-left: 5px;">更多</span>
           </a>
         </view>
@@ -69,11 +69,11 @@
     </view>
     <view class="layout_block">
       <view class="layout_title">
-        <i class="iconfont icon-ticket"></i>
-        我的历史订单
+        <span class="icon iconfont icon-ticket"></span>
+        <span style="margin-left: 5px;">我的历史订单</span>
         <view class="tool">
           <a href="javascript:;" class="more" @tap="toSettingPage('address')">
-            <i class="iconfont icon-menu"></i>
+            <span class="iconfont icon-menu"></span>
             <span style="margin-left: 5px;">更多</span>
           </a>
         </view>
@@ -92,8 +92,10 @@
             </view>
             <view class="actionbox">
               <text class="message" style="color: #4395ff">
-                <i class="icon iconfont icon-trolley"></i>
-                再来一单
+                <span class="icon iconfont icon-trolley"></span>
+                <span style="margin-left: 5px;">
+                  再来一单
+                </span>
               </text>
             </view>
           </view>
@@ -109,8 +111,8 @@
             </view>
             <view class="actionbox">
               <text class="message" style="color: #4395ff">
-                <i class="icon iconfont icon-trolley"></i>
-                再来一单
+                <span class="icon iconfont icon-trolley"></span>
+                <span style="margin-left: 5px;">再来一单</span>
               </text>
             </view>
           </view>
@@ -126,8 +128,8 @@
             </view>
             <view class="actionbox">
               <text class="message" style="color: #4395ff">
-                <i class="icon iconfont icon-trolley"></i>
-                再来一单
+                <span class="icon iconfont icon-trolley"></span>
+                <span style="margin-left: 5px;">再来一单</span>
               </text>
             </view>
           </view>

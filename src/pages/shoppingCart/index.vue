@@ -7,7 +7,7 @@
       >
         <view v-if="pageKey === 'common'">
           <view class="title-wrapper">
-            <button class="back-btn" @click="backPage"><i class="iconfont icon-back"></i></button>
+            <button class="back-btn" @click="backPage"><span class="iconfont icon-back"></span></button>
             <view class="title-text">购物车</view>
           </view>
           <view>
@@ -16,9 +16,9 @@
         </view>
       </view>
     </view>
-    <view class="main" ref="mainDiv">
+    <scroll-view class="main" scroll-y @scroll="onMainViewScroll">
       <common v-if="pageKey === 'common'" />
-    </view>
+    </scroll-view>
   </view>
 </template>
 
@@ -52,24 +52,16 @@ export default {
     }
   },
   mounted: function() {
-    // 请允许我最后操作一次DOM
     this.setHeaderSize();
-    var that = this;
-    document
-      .getElementsByClassName("main")[0]
-      .addEventListener("scroll", () => {
-        var t = document.getElementsByClassName("main")[0].scrollTop;
-        that.scrollEventList.forEach(function(event) {
-          event(t);
-        });
-      });
-    // this.postUserInfo();
   },
   methods: {
+    onMainViewScroll(event) {
+      var t = event.detail.scrollTop;
+      this.scrollEventList.forEach(function(event) {
+        event(t);
+      });
+    },
     setHeaderSize: function() {
-      var header = document.getElementsByClassName("header")[0];
-      var title = header.children[0];
-      var width = header.width;
       var margin_top = 50;
       var font_size = 28;
       var min_height = 50;

@@ -16,7 +16,7 @@
         </view>
         <view class="actionbox">
           <button class="push-cart-btn">
-            <i class="iconfont icon-trolley"></i>
+            <span class="iconfont icon-trolley"></span>
           </button>
         </view>
       </view>
@@ -35,7 +35,7 @@
         </view>
         <view class="actionbox">
           <button class="push-cart-btn">
-            <i class="iconfont icon-trolley"></i>
+            <span class="iconfont icon-trolley"></span>
           </button>
         </view>
       </view>
@@ -54,7 +54,7 @@
         </view>
         <view class="actionbox">
           <button class="push-cart-btn">
-            <i class="iconfont icon-trolley"></i>
+            <span class="iconfont icon-trolley"></span>
           </button>
         </view>
       </view>
@@ -73,7 +73,7 @@
         </view>
         <view class="actionbox">
           <button class="push-cart-btn">
-            <i class="iconfont icon-trolley"></i>
+            <span class="iconfont icon-trolley"></span>
           </button>
         </view>
       </view>
@@ -92,7 +92,7 @@
         </view>
         <view class="actionbox">
           <button class="push-cart-btn">
-            <i class="iconfont icon-trolley"></i>
+            <span class="iconfont icon-trolley"></span>
           </button>
         </view>
       </view>
@@ -111,7 +111,7 @@
         </view>
         <view class="actionbox">
           <button class="push-cart-btn">
-            <i class="iconfont icon-trolley"></i>
+            <span class="iconfont icon-trolley"></span>
           </button>
         </view>
       </view>
@@ -130,7 +130,7 @@
         </view>
         <view class="actionbox">
           <button class="push-cart-btn">
-            <i class="iconfont icon-trolley"></i>
+            <span class="iconfont icon-trolley"></span>
           </button>
         </view>
       </view>

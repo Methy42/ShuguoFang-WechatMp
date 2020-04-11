@@ -11,7 +11,11 @@
           :duration="500"
           @change="currentBannerIndexChange"
         >
-          <swiper-item v-for="(banner, index) in bannerList" :key="index" @click="toListPage('activityColumn', 1)">
+          <swiper-item
+            v-for="(banner, index) in bannerList"
+            :key="index"
+            @click="toListPage('activityColumn', 1)"
+          >
             <img :src="banner.imagePath" :alt="banner.title" />
           </swiper-item>
         </swiper>
@@ -25,13 +29,8 @@
     </view>
     <view class="layout_block">
       <view class="layout_title">
-        <i class="iconfont icon-menu"></i>
-        小店分类
-        <!-- <view class="tool">
-                <a href="javascript:;" class="more">
-                    更多&nbsp;&gt;
-                </a>
-        </view>-->
+        <span class="icon iconfont icon-menu"></span>
+        <span style="margin-left: 5px;">小店分类</span>
       </view>
       <view class="content">
         <view class="grid">
@@ -106,8 +105,8 @@
     </view>
     <view class="layout_block">
       <view class="layout_title">
-        <i class="iconfont icon-strawberry"></i>
-        鲜果特惠
+        <span class="icon iconfont icon-strawberry"></span>
+        <span style="margin-left: 5px;">鲜果特惠</span>
         <view class="tool">
           <a href="javascript:;" class="more">更多&nbsp;&gt;</a>
         </view>
@@ -153,8 +152,8 @@
     </view>
     <view class="layout_block">
       <view class="layout_title">
-        <i class="iconfont icon-toast"></i>
-        美味鲜肉
+        <span class="icon iconfont icon-toast"></span>
+        <span style="margin-left: 5px;">美味鲜肉</span>
         <view class="tool">
           <a href="javascript:;" class="more">更多&nbsp;&gt;</a>
         </view>
@@ -192,8 +191,8 @@
     </view>
     <view class="layout_block">
       <view class="layout_title">
-        <i class="iconfont icon-toast"></i>
-        美味鲜肉
+        <span class="icon iconfont icon-toast"></span>
+        <span style="margin-left: 5px;">美味鲜肉</span>
         <view class="tool">
           <a href="javascript:;" class="more">更多&nbsp;&gt;</a>
         </view>
@@ -235,7 +234,7 @@
 
 <script>
 import searchInput from "../../components/searchInput";
-import IndexShoppingCart from '../../components/indexShoppingCart';
+import IndexShoppingCart from "../../components/indexShoppingCart";
 export default {
   components: { searchInput, IndexShoppingCart },
   data() {
@@ -269,8 +268,7 @@ export default {
       ]
     };
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     currentBannerIndexChange(event) {
       this.currentBannerIndex = event.detail.current;

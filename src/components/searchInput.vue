@@ -1,6 +1,6 @@
 <template>
   <view class="search" @click="setInputFocus">
-    <i class="icon iconfont icon-search"></i>
+    <span class="icon iconfont icon-search"></span>
     <input ref="input" type="text" :placeholder="placeholder ? placeholder : '搜索你想要的'" v-model="searchValue" @input="onInput" />
   </view>
 </template>
