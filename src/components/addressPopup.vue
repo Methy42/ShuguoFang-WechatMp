@@ -2,20 +2,13 @@
   <uni-popup ref="addressPopup" :type="'bottom'" :mask-click="false">
     <view class="popup-wrapper">
       <view class="detail-input-wrapper">
-        <input type="text" v-model="result.detail" />
+        <view class="icon-wrapper">
+          <text class="iconfont icon-dingwei"></text>
+        </view>
+        <text class="input"></text>
       </view>
-      <view class="address-picker-wrapper">
-        <picker-view :indicator-style="indicatorStyle" :value="addressPickerValue" @change="pickerChange">
-          <picker-view-column>
-            <view class="item" v-for="(item) in provinceArr" :key="item.name">{{item.name}}</view>
-          </picker-view-column>
-          <picker-view-column>
-            <view class="item" v-for="(item) in cityArr" :key="item.name">{{item.name}}</view>
-          </picker-view-column>
-          <picker-view-column>
-            <view class="item" v-for="(item) in districtArr" :key="item.name">{{item}}</view>
-          </picker-view-column>
-        </picker-view>
+      <view class="detail-input-wrapper">
+        <textarea v-model="result.detail" placeholder="请输入详细地址"></textarea>
       </view>
       <view class="uni-tip-group-button">
         <text class="uni-tip-button" @click="cancel()">取消</text>
@@ -57,24 +50,24 @@ export default {
       this.result.detail = address.detail;
 
       this.setAddressPicker();
-      
+
       this.$refs["addressPopup"].open();
     },
-    setAddressPicker(){
+    setAddressPicker() {
       let provinceIndex = 0;
       let cityIndex = 0;
       let districtIndex = 0;
 
       allAddressData.forEach((p, index) => {
-        if(p.name === this.result.province){
+        if (p.name === this.result.province) {
           provinceIndex = index;
           this.cityArr = p.city;
           p.city.forEach((c, index) => {
-            if(c.name === this.result.city){
+            if (c.name === this.result.city) {
               cityIndex = index;
               this.districtArr = c.area;
               c.area.forEach((a, index) => {
-                if(a === this.result.district){
+                if (a === this.result.district) {
                   districtIndex = index;
                 }
               });
@@ -82,25 +75,21 @@ export default {
           });
         }
       });
-      this.addressPickerValue = [
-        provinceIndex,
-        cityIndex,
-        districtIndex
-      ];
+      this.addressPickerValue = [provinceIndex, cityIndex, districtIndex];
     },
-    setAddressResult(values){
+    setAddressResult(values) {
       let provinceName = "";
       let cityName = "";
       let districtName = "";
 
       allAddressData.forEach((p, index) => {
-        if(values[0] === index){
+        if (values[0] === index) {
           provinceName = p.name;
-          p.city.forEach((c,index) => {
-            if(values[1] === index){
+          p.city.forEach((c, index) => {
+            if (values[1] === index) {
               cityName = c.name;
               c.area.forEach((a, index) => {
-                if(values[2] === index){
+                if (values[2] === index) {
                   districtName = a.name;
                 }
               });
@@ -154,10 +143,10 @@ export default {
   font-size: 14px;
   color: #3b4144;
 }
-.uni-tip-button:last-child{
+.uni-tip-button:last-child {
   border-left: 1px solid #f6f6f6;
 }
-.popup-wrapper{
+.popup-wrapper {
   height: 300px;
   background: #fff;
   display: flex;
@@ -168,17 +157,29 @@ export default {
   flex-shrink: 0;
   border-bottom: 1px solid #f6f6f6;
   padding: 0px 15px;
+  display: flex;
 }
-.detail-input-wrapper input{
+.detail-input-wrapper .icon-wrapper {
+  width: 20px;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.detail-input-wrapper .input {
   font-size: 18px;
   height: 50px;
   line-height: 50px;
+  flex-grow: 1;
 }
 .address-picker-wrapper {
   flex-grow: 1;
   padding: 0px 15px;
 }
-.address-picker-wrapper picker-view{
+.address-picker-wrapper picker-view {
   height: 100%;
 }
 </style>

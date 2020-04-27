@@ -1,15 +1,34 @@
 <template>
   <view class="shopping-cart-wrapper">
     <button @click="toShoppingCartPage('common')">
-      <span class="iconfont icon-trolley"></span>
+      <view class="icon-wrapper">
+        <text class="iconfont icon-trolley"></text>
+      </view>
     </button>
-    <view class="tag">3</view>
+    <view class="tag" v-if="count > 0">{{ count }}</view>
   </view>
 </template>
 
 <script>
+import { apiGetCurrentUserShoppingCartCommodityList } from '@/api/main';
 export default {
+  data(){
+    return {
+      count: 0
+    }
+  },
+  mounted() {
+    this.getShoppingCartInfo();
+  },
   methods: {
+    getShoppingCartInfo() {
+      apiGetCurrentUserShoppingCartCommodityList(1).then(res => {
+        this.count = res.total;
+      });
+    },
+    refresh(){
+      this.getShoppingCartInfo();
+    },
     toShoppingCartPage(type) {
       uni.navigateTo({
         url: "/pages/shoppingCart/index?type=" + type
@@ -35,7 +54,7 @@ export default {
   background-color: #fff;
   border-radius: 50%;
   border: 1px solid #efefef;
-  box-shadow:0 0 5px #888;
+  box-shadow: 0 0 5px #888;
 }
 .shopping-cart-wrapper button .iconfont {
   font-size: 24px;

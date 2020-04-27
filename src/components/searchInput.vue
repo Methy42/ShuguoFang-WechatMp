@@ -1,6 +1,6 @@
 <template>
   <view class="search" @click="setInputFocus">
-    <span class="icon iconfont icon-search"></span>
+    <text class="icon iconfont icon-search"></text>
     <input ref="input" type="text" :placeholder="placeholder ? placeholder : '搜索你想要的'" v-model="searchValue" @input="onInput" />
   </view>
 </template>
@@ -18,7 +18,7 @@ export default {
       this.$refs['input'].focus = true;
     },
     onInput(event) {
-      console.log(event);
+      this.$emit('on-change', event.detail.value);
     }
   }
 };

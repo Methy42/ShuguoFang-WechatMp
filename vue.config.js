@@ -11,7 +11,7 @@ module.exports = {
       new CopyWebpackPlugin([{
         from: path.join(__dirname, 'vendor', vendor),
         to: 'vendor'
-      }]),
+      }])
     ]
   }
 };

@@ -2,12 +2,18 @@ import Vue from 'vue'
 import App from './App'
 
 import i18n from './language'
+import filters from './filters';
+import './system.config';
 
-import './static/css/font.css'
 import './static/css/style.css'
 import './static/iconfont/iconfont.css';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
+Vue.prototype.$filters = filters;
 
 App.mpType = 'app'
 

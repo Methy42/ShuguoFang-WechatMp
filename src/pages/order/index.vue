@@ -8,7 +8,7 @@
         <view v-if="pageKey === 'make'">
           <view class="title-wrapper">
             <button class="back-btn" @click="backPage">
-              <span class="iconfont icon-back"></span>
+              <text class="iconfont icon-back"></text>
             </button>
             <view class="title-text">确认支付</view>
           </view>
@@ -16,7 +16,7 @@
         <view v-if="pageKey === 'live'">
           <view class="title-wrapper">
             <button class="back-btn" @click="backPage">
-              <span class="iconfont icon-back"></span>
+              <text class="iconfont icon-back"></text>
             </button>
             <view class="title-text">订单等待送达</view>
           </view>
@@ -24,7 +24,7 @@
         <view v-if="pageKey === 'over'">
           <view class="title-wrapper">
             <button class="back-btn" @click="backPage">
-              <span class="iconfont icon-back"></span>
+              <text class="iconfont icon-back"></text>
             </button>
             <view class="title-text">订单完结</view>
           </view>

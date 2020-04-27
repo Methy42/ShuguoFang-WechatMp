@@ -7,21 +7,21 @@
       >
         <view v-if="pageKey === 'addressList'">
           <view class="title-wrapper">
-            <button class="back-btn" @click="backPage"><span class="iconfont icon-back"></span></button>
+            <button class="back-btn" @click="backPage"><text class="iconfont icon-back"></text></button>
             <view class="title-text">管理我的地址</view>
           </view>
         </view>
         <view v-if="pageKey === 'addressSetting'">
           <view class="title-wrapper">
-            <button class="back-btn" @click="backPage"><span class="iconfont icon-back"></span></button>
-            <view class="title-text">南京建邺区金穗花园1栋1703</view>
+            <button class="back-btn" @click="backPage"><text class="iconfont icon-back"></text></button>
+            <view class="title-text">{{settingPageTitle}}</view>
           </view>
         </view>
       </view>
     </view>
     <scroll-view class="main" scroll-y @scroll="onMainViewScroll">
-      <address-list v-if="pageKey === 'addressList'" />
-      <address-setting v-if="pageKey === 'addressSetting'" />
+      <address-list v-if="pageKey === 'addressList'" ref="addressList" />
+      <address-setting v-if="pageKey === 'addressSetting'" :address="address" @on-submited="backPage" />
     </scroll-view>
   </view>
 </template>
@@ -29,7 +29,7 @@
 <script>
 import AddressList from "./addressList";
 import AddressSetting from "./addressSetting";
-
+import { apiGetCurrentUserAddressDetail } from '@/api/main'
 export default {
   components: {
     AddressList,
@@ -37,7 +37,9 @@ export default {
   },
   data() {
     return {
-      pageKey: "address",
+      pageKey: "addressList",
+      address: {},
+      settingPageTitle: "",
       classObject: {
         header: ""
       },
@@ -50,15 +52,23 @@ export default {
       scrollEventList: []
     };
   },
-  onLoad: function(option) {
+  onLoad(option) {
     if (option.type === "addressList") {
       this.pageKey = "addressList";
     }
     if (option.type === "addressSetting") {
+      if(option.action === "create"){
+        this.settingPageTitle = "新建地址";
+      } else if (option.action === 'edit'){
+        this.getAddressDetil(option.id);
+      }
       this.pageKey = "addressSetting";
     }
   },
-  mounted: function() {
+  onShow(){
+    if(this.$refs['addressList']) this.$refs['addressList'].getMineAddress();
+  },
+  mounted() {
     this.setHeaderSize();
   },
   methods: {
@@ -91,6 +101,12 @@ export default {
         }
       }
       this.scrollEventList.push(scroll);
+    },
+    getAddressDetil(id){
+      apiGetCurrentUserAddressDetail(id).then(res => {
+        this.address = res;
+        this.settingPageTitle = res.addressDetail;
+      });
     },
     backPage() {
       uni.navigateBack({

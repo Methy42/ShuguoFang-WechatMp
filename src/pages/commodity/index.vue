@@ -4,14 +4,14 @@
       <view class="title" v-bind:style="{ fontSize: styleObject.title.fontSize + 'px', marginTop: styleObject.title.marginTop + 'px' }">
         <view class="title-wrapper">
           <button class="back-btn" @click="backPage">
-            <span class="iconfont icon-back"></span>
+            <text class="iconfont icon-back"></text>
           </button>
-          <view class="title-text">商品名称</view>
+          <view class="title-text">{{commonTitle}}</view>
         </view>
       </view>
     </view>
     <scroll-view class="main" scroll-y @scroll="onMainViewScroll">
-      <common-commodity v-if="pageKey === 'common'" />
+      <common-commodity v-if="pageKey === 'common'" :id="commonId" />
     </scroll-view>
   </view>
 </template>
@@ -26,6 +26,8 @@ export default {
   data() {
     return {
       pageKey: "common",
+      commonId: "",
+      commonTitle: "",
       classObject: {
         header: ""
       },
@@ -37,6 +39,13 @@ export default {
       },
       scrollEventList: []
     };
+  },
+  onLoad: function(option) {
+    if (option.type === "common") {
+      this.pageKey = "common"
+      this.commonId = option.id;
+      this.commonTitle = option.name;
+    }
   },
   mounted: function() {
     // 请允许我最后操作一次DOM

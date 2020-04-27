@@ -8,9 +8,9 @@
         <view v-if="pageKey === 'activityColumn'">
           <view class="title-wrapper">
             <button class="back-btn" @click="backPage">
-              <span class="iconfont icon-back"></span>
+              <text class="iconfont icon-back"></text>
             </button>
-            <view class="title-text">活动专栏</view>
+            <view class="title-text">{{activityColumnName}}</view>
           </view>
           <view>
             <search-input :placeholder="'在专栏内搜索'" />
@@ -19,24 +19,25 @@
         <view v-if="pageKey === 'classification'">
           <view class="title-wrapper">
             <button class="back-btn" @click="backPage">
-              <span class="iconfont icon-back"></span>
+              <text class="iconfont icon-back"></text>
             </button>
-            <view class="title-text">分类</view>
+            <view class="title-text">{{typeName}}</view>
           </view>
           <view>
-            <search-input :placeholder="'在分类内搜索'" />
+            <search-input :placeholder="'在' + typeName + '分类内搜索'" @on-change="onTypeSearchValueChange" />
           </view>
         </view>
       </view>
     </view>
     <scroll-view class="main" scroll-y @scroll="onMainViewScroll">
-      <activity-column v-if="pageKey === 'activityColumn'" />
-      <classification v-if="pageKey === 'classification'" />
+      <activity-column v-if="pageKey === 'activityColumn'" :id="activityColumnId" :searchValue="activityColumnSearchValue" />
+      <classification v-if="pageKey === 'classification'" :id="typeId" :searchValue="typeSearchValue" />
     </scroll-view>
   </view>
 </template>
 
 <script>
+import { apiGetTypeDetail } from "@/api/main";
 import ActivityColumn from "./activityColumn";
 import Classification from "./classification";
 import SearchInput from "../../components/searchInput";
@@ -50,6 +51,14 @@ export default {
   data() {
     return {
       pageKey: "classification",
+      typeId: "",
+      typeName: "",
+      typeIconPath: "",
+      typeSearchValue: "",
+      activityColumnId: "",
+      activityColumnName: "",
+      activityColumnIconPath: "",
+      activityColumnSearchValue: "",
       classObject: {
         header: ""
       },
@@ -65,8 +74,12 @@ export default {
   onLoad: function(option) {
     if (option.type === "activityColumn") {
       this.pageKey = "activityColumn";
+      this.activityColumnId = option.id;
+      this.activityColumnName = option.name;
     } else if (option.type === "classification") {
       this.pageKey = "classification";
+      this.typeId = option.id;
+      this.typeName = option.name;
     }
   },
   mounted: function() {
@@ -78,6 +91,10 @@ export default {
       this.scrollEventList.forEach(function(event) {
         event(t);
       });
+    },
+    onTypeSearchValueChange(value){
+      this.typeSearchValue = value;
+      this.activityColumnSearchValue = value;
     },
     setHeaderSize: function() {
       var margin_top = 50;

@@ -1,6 +1,8 @@
 <template>
   <view class="container" style="margin-bottom: 30px;">
-    <search-input />
+    <view @tap="toSearchTab">
+      <search-input />
+    </view>
     <view class="layout_today">
       <view class="card banner" style="position:relative;">
         <swiper
@@ -20,82 +22,51 @@
           </swiper-item>
         </swiper>
         <view v-for="(banner, index) in bannerList" :key="index">
-          <span v-if="currentBannerIndex === index">
-            <span class="title" style="font-size: 16px;">{{ banner.title }}</span>
-            <span class="message" style="font-size: 16px;">{{ banner.description }}</span>
-          </span>
+          <text v-if="currentBannerIndex === index">
+            <text class="title" style="font-size: 16px;">{{ banner.title }}</text>
+            <!-- <text class="message" style="font-size: 16px;">{{ banner.description }}</text> -->
+          </text>
         </view>
       </view>
     </view>
     <view class="layout_block">
       <view class="layout_title">
-        <span class="icon iconfont icon-menu"></span>
-        <span style="margin-left: 5px;">小店分类</span>
+        <view class="label">
+          <text class="icon iconfont icon-menu"></text>
+          <text style="margin-left: 5px;">小店分类</text>
+        </view>
       </view>
       <view class="content">
-        <view class="grid">
-          <view class="item">
-            <view class="index-classification-btn" @click="toListPage('classification', 1)">
+        <view class="grid" v-for="(types, index) in typeList" :key="index">
+          <view class="item" v-for="(type, index) in types" :key="index">
+            <view
+              class="index-classification-btn"
+              @tap="toListPage('classification', type.id, type.name)"
+            >
               <view class="icon">
-                <img src="/static/images/icons/fruits.png" alt />
+                <img :src="type.iconPath + '/small.jpg'" alt />
               </view>
-              <text>水果</text>
+              <text>{{ type.name }}</text>
             </view>
           </view>
-          <view class="item">
-            <view class="index-classification-btn">
+          <view class="item" v-if="index === 1">
+            <view class="index-classification-btn" @tap="toListPage('activityColumn', 2, '推荐')">
               <view class="icon">
-                <img src="/static/images/icons/vegetables.png" alt />
-              </view>
-              <text>蔬菜</text>
-            </view>
-          </view>
-          <view class="item">
-            <view class="index-classification-btn">
-              <view class="icon">
-                <img src="/static/images/icons/meat.png" alt />
-              </view>
-              <text>肉类</text>
-            </view>
-          </view>
-          <view class="item">
-            <view class="index-classification-btn">
-              <view class="icon">
-                <img src="/static/images/icons/condiments.png" alt />
-              </view>
-              <text>佐料</text>
-            </view>
-          </view>
-        </view>
-        <view class="grid">
-          <view class="item">
-            <view class="index-classification-btn">
-              <view class="icon">
-                <img src="/static/images/icons/grain&oil.png" alt />
-              </view>
-              <text>粮油</text>
-            </view>
-          </view>
-          <view class="item">
-            <view class="index-classification-btn">
-              <view class="icon">
-                <img src="/static/images/icons/snacks.png" alt />
-              </view>
-              <text>零食</text>
-            </view>
-          </view>
-          <view class="item">
-            <view class="index-classification-btn">
-              <view class="icon">
-                <img src="/static/images/icons/recommend(1).png" alt />
+                <img
+                  :src="assetsUrl + '/static/images/promote_sales_icons/recommend/small.jpg'"
+                  alt
+                />
               </view>
               <text>推荐</text>
             </view>
           </view>
-          <view class="item">
-            <view class="index-classification-btn">
+          <view class="item" v-if="index === 1">
+            <view class="index-classification-btn" @tap="toListPage('activityColumn', 3, '热门')">
               <view class="icon">
-                <img src="/static/images/icons/recommend.png" alt />
+                <img
+                  :src="assetsUrl + '/static/images/promote_sales_icons/popular/small.jpg'"
+                  alt
+                />
               </view>
               <text>热门</text>
             </view>
@@ -103,126 +74,20 @@
         </view>
       </view>
     </view>
-    <view class="layout_block">
+    <view v-for="(special, index) in specialTopFiveList" class="layout_block" :key="index" @tap="toListPage('activityColumn', special.id, special.name)">
       <view class="layout_title">
-        <span class="icon iconfont icon-strawberry"></span>
-        <span style="margin-left: 5px;">鲜果特惠</span>
-        <view class="tool">
-          <a href="javascript:;" class="more">更多&nbsp;&gt;</a>
+        <view class="label">
+          <img class="icon-image" :src="special.iconPath + '/title_icon.jpg'" />
+          <text style="margin-left: 5px;">{{ special.name }}</text>
         </view>
       </view>
       <view class="content">
         <view class="banner_multi">
           <view class="banners">
-            <view class="card">
-              <img
-                src="/static/images/banners/5b918e78573b8dfb7326cc3a7bc67d4abd691edd24ba5-d898O8_fw658.jpg"
-                alt
-              />
-              <span class="title">荷兰鲜橙...</span>
-              <span class="price">￥14.80/斤</span>
-            </view>
-            <view class="card">
-              <img
-                src="/static/images/banners/62f006a776e86b1953284878f0bfa3f30f6f2b50f14ff-DFVAlT_fw658.png"
-                alt
-              />
-              <span class="title">波兰青萍...</span>
-              <span class="price">￥14.80/斤</span>
-            </view>
-            <view class="card">
-              <img
-                src="/static/images/banners/065d1b3186ee17f86dd49397690f1c4ccd4f89ff62168-Xylrjw_fw658.jpg"
-                alt
-              />
-              <span class="title">法国冬梨...</span>
-              <span class="price">￥14.80/斤</span>
-            </view>
-            <view class="card">
-              <img
-                src="/static/images/banners/1544c308816416dee65953ccde4acd4f68d0389e3c814-wpBlKf_fw658.jpg"
-                alt
-              />
-              <span class="title">哈密葡萄...</span>
-              <span class="price">￥14.80/斤</span>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class="layout_block">
-      <view class="layout_title">
-        <span class="icon iconfont icon-toast"></span>
-        <span style="margin-left: 5px;">美味鲜肉</span>
-        <view class="tool">
-          <a href="javascript:;" class="more">更多&nbsp;&gt;</a>
-        </view>
-      </view>
-      <view class="content">
-        <view class="banner_multi">
-          <view class="banners">
-            <view class="card">
-              <img
-                src="/static/images/banners/1c3c94fbac86841391d617fbe714f006b9c96b43e688e-gHEB0Q_fw658.png"
-                alt
-              />
-              <span class="title">奥冷牛排...</span>
-              <span class="price">￥14.80/斤</span>
-            </view>
-            <view class="card">
-              <img
-                src="/static/images/banners/eb14dde47a6a4e9aa43641b62766b60cd999234932f5b-1yWnR6_fw658.jpg"
-                alt
-              />
-              <span class="title">美国猪肉...</span>
-              <span class="price">￥14.80/斤</span>
-            </view>
-            <view class="card">
-              <img
-                src="/static/images/banners/aae055fb733198b70c945fd02fc578dddf590b9e4cf47-RAOAEr_fw658.jpg"
-                alt
-              />
-              <span class="title">德国嫩牛...</span>
-              <span class="price">￥14.80/斤</span>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class="layout_block">
-      <view class="layout_title">
-        <span class="icon iconfont icon-toast"></span>
-        <span style="margin-left: 5px;">美味鲜肉</span>
-        <view class="tool">
-          <a href="javascript:;" class="more">更多&nbsp;&gt;</a>
-        </view>
-      </view>
-      <view class="content">
-        <view class="banner_multi">
-          <view class="banners">
-            <view class="card">
-              <img
-                src="/static/images/banners/1c3c94fbac86841391d617fbe714f006b9c96b43e688e-gHEB0Q_fw658.png"
-                alt
-              />
-              <span class="title">奥冷牛排...</span>
-              <span class="price">￥14.80/斤</span>
-            </view>
-            <view class="card">
-              <img
-                src="/static/images/banners/eb14dde47a6a4e9aa43641b62766b60cd999234932f5b-1yWnR6_fw658.jpg"
-                alt
-              />
-              <span class="title">美国猪肉...</span>
-              <span class="price">￥14.80/斤</span>
-            </view>
-            <view class="card">
-              <img
-                src="/static/images/banners/aae055fb733198b70c945fd02fc578dddf590b9e4cf47-RAOAEr_fw658.jpg"
-                alt
-              />
-              <span class="title">德国嫩牛...</span>
-              <span class="price">￥14.80/斤</span>
+            <view class="card" v-for="(good, index) in special.goodList" :key="index">
+              <img :src="good.imagePath + '/show_in_banner_1.jpg'" alt />
+              <text class="title">{{good.name}}</text>
+              <text class="price">￥{{good.price}}·{{good.unit}}</text>
             </view>
           </view>
         </view>
@@ -235,48 +100,47 @@
 <script>
 import searchInput from "../../components/searchInput";
 import IndexShoppingCart from "../../components/indexShoppingCart";
+import {
+  apiGetBannerList,
+  apiGetTypeList,
+  apiGetSpecialTopFiveList
+} from "../../api/main";
 export default {
   components: { searchInput, IndexShoppingCart },
   data() {
     return {
       currentBannerIndex: 0,
-      bannerList: [
-        {
-          id: 1,
-          imagePath:
-            "/static/images/banners/08899900a428d1000099f341edcff2ff1ca0108c2f48c-LaMX4k_fw658.jpg",
-          type: "column",
-          title: "精选越南红富士1111",
-          description: "甘甜可口1111"
-        },
-        {
-          id: 1,
-          imagePath:
-            "/static/images/banners/08899900a428d1000099f341edcff2ff1ca0108c2f48c-LaMX4k_fw658.jpg",
-          type: "column",
-          title: "精选越南红富士2222",
-          description: "甘甜可口2222"
-        },
-        {
-          id: 1,
-          imagePath:
-            "/static/images/banners/08899900a428d1000099f341edcff2ff1ca0108c2f48c-LaMX4k_fw658.jpg",
-          type: "commodity",
-          title: "精选越南红富士3333",
-          description: "甘甜可口3333"
-        }
-      ]
+      bannerList: [],
+      typeList: [[], []],
+      specialTopFiveList: [],
+      assetsUrl: uni.system_config.assetsUrl
     };
   },
-  mounted() {},
+  mounted() {
+    this.init();
+  },
   methods: {
+    async init() {
+      const bannerList = await apiGetBannerList();
+      const typeList = await apiGetTypeList();
+      const specialTopFiveList = await apiGetSpecialTopFiveList();
+
+      this.bannerList = bannerList;
+      typeList.forEach((type, index) => {
+        this.typeList[parseInt(index / 4)].push(type);
+      });
+      this.specialTopFiveList = specialTopFiveList;
+    },
     currentBannerIndexChange(event) {
       this.currentBannerIndex = event.detail.current;
     },
-    toListPage(type, id) {
+    toListPage(type, id, name) {
       uni.navigateTo({
-        url: "/pages/list/index?type=" + type + "&id=" + id
+        url: "/pages/list/index?type=" + type + "&id=" + id + "&name=" + name
       });
+    },
+    toSearchTab() {
+      this.$emit("on-search");
     }
   }
 };

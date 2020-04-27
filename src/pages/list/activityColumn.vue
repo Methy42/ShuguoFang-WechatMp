@@ -1,155 +1,106 @@
 <template>
   <view class="container">
     <view class="layout_list">
-      <view class="item" @click="toCommodityPage('1')">
-        <view class="commodity">
+      <view class="item" v-for="(commodity, index) in commodityList" :key="index">
+        <view class="commodity" @tap="toCommodityPage(commodity.id, commodity.name)">
           <view class="image-wrapper">
-              <img src="/static/images/fruits/05d6ff83fd1cf326.jpg" alt />
+            <img :src="commodity.imagePath + '/show_in_list.jpg'" alt />
           </view>
           <view class="content">
-            <span class="title">泰国精品车厘子</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
+            <text class="title">{{commodity.name}}</text>
+            <text class="message">
+              <b>￥{{commodity.price}}·{{commodity.unit}}</b>
+              <br />
+              <text
+                class="bage red"
+                v-for="tag in commodity.tags"
+                :key="tag.id"
+                style="margin-right: 5px;"
+              >{{tag.name}}</text>
+            </text>
           </view>
         </view>
-        <view class="actionbox">
-          <button class="push-cart-btn">
-            <span class="iconfont icon-trolley"></span>
+        <view class="actionbox" v-if="!shoppingCartRecord(commodity).number">
+          <button class="push-cart-btn" @tap="pushToShoppingCart(commodity.id)">
+            <text class="iconfont icon-trolley"></text>
           </button>
         </view>
-      </view>
-      <view class="item" @click="toCommodityPage('1')">
-        <view class="commodity">
-          <view class="image-wrapper">
-              <img src="/static/images/fruits/5a30f676N29e74e73.jpg" alt />
-          </view>
-          <view class="content">
-            <span class="title">云南精品龙眼</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
-          </view>
-        </view>
-        <view class="actionbox">
-          <button class="push-cart-btn">
-            <span class="iconfont icon-trolley"></span>
-          </button>
-        </view>
-      </view>
-      <view class="item" @click="toCommodityPage('1')">
-        <view class="commodity">
-          <view class="image-wrapper">
-              <img src="/static/images/fruits/5b790440N80765d11.jpg" alt />
-          </view>
-          <view class="content">
-            <span class="title">比利时精品金桔</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
-          </view>
-        </view>
-        <view class="actionbox">
-          <button class="push-cart-btn">
-            <span class="iconfont icon-trolley"></span>
-          </button>
-        </view>
-      </view>
-      <view class="item" @click="toCommodityPage('1')">
-        <view class="commodity">
-          <view class="image-wrapper">
-              <img src="/static/images/fruits/05d6ff83fd1cf326.jpg" alt />
-          </view>
-          <view class="content">
-            <span class="title">泰国精品车厘子</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
-          </view>
-        </view>
-        <view class="actionbox">
-          <button class="push-cart-btn">
-            <span class="iconfont icon-trolley"></span>
-          </button>
-        </view>
-      </view>
-      <view class="item" @click="toCommodityPage('1')">
-        <view class="commodity">
-          <view class="image-wrapper">
-              <img src="/static/images/fruits/05d6ff83fd1cf326.jpg" alt />
-          </view>
-          <view class="content">
-            <span class="title">泰国精品车厘子</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
-          </view>
-        </view>
-        <view class="actionbox">
-          <button class="push-cart-btn">
-            <span class="iconfont icon-trolley"></span>
-          </button>
-        </view>
-      </view>
-      <view class="item" @click="toCommodityPage('1')">
-        <view class="commodity">
-          <view class="image-wrapper">
-              <img src="/static/images/fruits/05d6ff83fd1cf326.jpg" alt />
-          </view>
-          <view class="content">
-            <span class="title">泰国精品车厘子</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
-          </view>
-        </view>
-        <view class="actionbox">
-          <button class="push-cart-btn">
-            <span class="iconfont icon-trolley"></span>
-          </button>
-        </view>
-      </view>
-      <view class="item" @click="toCommodityPage('1')">
-        <view class="commodity">
-          <view class="image-wrapper">
-              <img src="/static/images/fruits/05d6ff83fd1cf326.jpg" alt />
-          </view>
-          <view class="content">
-            <span class="title">泰国精品车厘子</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
-          </view>
-        </view>
-        <view class="actionbox">
-          <button class="push-cart-btn">
-            <span class="iconfont icon-trolley"></span>
-          </button>
+        <view class="actionbox" v-else>
+          <text
+            class="inline-action-bage iconfont icon-minus"
+            @tap="updateCommodityCount(shoppingCartRecord(commodity).id, commodity.id, shoppingCartRecord(commodity).number-1)"
+          ></text>
+          <text class="inline-bage">{{shoppingCartRecord(commodity).number}}</text>
+          <text
+            class="inline-action-bage iconfont icon-plus"
+            @tap="updateCommodityCount(shoppingCartRecord(commodity).id, commodity.id, shoppingCartRecord(commodity).number+1)"
+          ></text>
         </view>
       </view>
     </view>
-    <index-shopping-cart />
+    <index-shopping-cart ref="indexShoppingCart" />
   </view>
 </template>
 
 <script>
-import IndexShoppingCart from '../../components/indexShoppingCart';
+import {
+  apiGetActivityColumnDetail,
+  apiPushCommodityToShoppingCart,
+  apiUpdateCommondityCountInShoppingCart
+} from "@/api/main";
+import store from "@/store/index";
+import IndexShoppingCart from "../../components/indexShoppingCart";
 
 export default {
   components: { IndexShoppingCart },
-  mounted() {},
+  props: ["id", "searchValue"],
+  data() {
+    return {
+      page: 1,
+      commodityList: []
+    };
+  },
+  computed: {
+    shoppingCartRecord() {
+      return commodity => {
+        console.log(store.state.shoppingCartInfo);
+        return (
+          store.state.shoppingCartInfo.records.find(
+            record => record.goodsId === commodity.id
+          ) || {}
+        );
+      };
+    }
+  },
+  watch: {
+    id(newValue, oldValue) {
+      this.getGoodList();
+    },
+    searchValue(newValue, oldValue) {
+      this.getGoodList();
+    }
+  },
+  mounted() {
+    this.getGoodList();
+  },
   methods: {
     toCommodityPage(id) {
       uni.navigateTo({
         url: "/pages/commodity/index?id=" + id
       });
+    },
+    getGoodList() {
+      apiGetActivityColumnDetail(this.id).then(res => {
+        this.commodityList = res;
+      });
+    },
+    pushToShoppingCart(id) {
+      apiPushCommodityToShoppingCart(id, 1).then(() => {
+        this.$refs["indexShoppingCart"].refresh();
+      });
+    },
+    updateCommodityCount(shopId, commodityId, count) {
+      apiUpdateCommondityCountInShoppingCart(shopId, commodityId, count).then();
     }
   }
 };

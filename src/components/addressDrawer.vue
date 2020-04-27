@@ -3,8 +3,10 @@
     <view style="padding:15px;">
       <view class="layout_block">
         <view class="layout_title">
-          <span class="iconfont icon-ticket"></span>
-          <span style="margin-left">请选择收货地址</span>
+          <view class="label">
+            <text class="iconfont icon-ticket"></text>
+            <text style="margin-left">请选择收货地址</text>
+          </view>
           <view class="tool">
             <a href="javascript:;" class="setting">
               <text class="iconfont icon-setting"></text>
@@ -17,10 +19,10 @@
             <view class="item" v-for="(address) in addressArr" :key="address.id">
               <view class="commodity">
                 <view class="content">
-                  <span class="title">{{address.address}}</span>
-                  <span class="message">
+                  <text class="title">{{address.address}}</text>
+                  <text class="message">
                     <b>{{ address.name }}&nbsp;-&nbsp;{{ address.telephone }}</b>
-                  </span>
+                  </text>
                 </view>
               </view>
             </view>

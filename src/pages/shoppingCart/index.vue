@@ -7,7 +7,7 @@
       >
         <view v-if="pageKey === 'common'">
           <view class="title-wrapper">
-            <button class="back-btn" @click="backPage"><span class="iconfont icon-back"></span></button>
+            <button class="back-btn" @click="backPage"><text class="iconfont icon-back"></text></button>
             <view class="title-text">购物车</view>
           </view>
           <view>

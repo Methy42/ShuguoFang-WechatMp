@@ -1,176 +1,100 @@
 <template>
   <view class="container">
     <view class="layout_list">
-      <view class="item" @click="toInfoPage('1')">
-        <view class="checkbox">
-          <checkbox />
-        </view>
-        <view class="commodity">
-          <view class="image-wrapper">
-            <img src="/static/images/fruits/05d6ff83fd1cf326.jpg" alt />
+      <checkbox-group @change="onCommodityCheckChange">
+        <view class="item" v-for="(commodity, index) in commodityList" :key="index">
+          <view class="checkbox">
+            <checkbox :value="commodity.id.toString()" />
           </view>
-          <view class="content">
-            <span class="title">泰国精品车厘子</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
+          <view class="commodity">
+            <view class="image-wrapper">
+              <img :src="commodity.imagePath + '/show_in_list.jpg'" alt />
+            </view>
+            <view class="content">
+              <text class="title">{{commodity.name}}</text>
+              <text class="message">
+                <b>￥{{commodity.price}}·{{commodity.unit}}</b>
+                <br />
+              </text>
+            </view>
           </view>
-        </view>
-      </view>
-      <view class="item" @click="toInfoPage('1')">
-        <view class="checkbox">
-          <checkbox />
-        </view>
-        <view class="commodity">
-          <view class="image-wrapper">
-            <img src="/static/images/fruits/5a30f676N29e74e73.jpg" alt />
-          </view>
-          <view class="content">
-            <span class="title">云南精品龙眼</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
+          <view class="actionbox">
+            <text
+              class="inline-action-bage iconfont icon-minus"
+              @tap="updateCommodityCount(commodity.shopId, commodity.id, commodity.count-1)"
+            ></text>
+            <text class="inline-bage">{{commodity.count}}</text>
+            <text
+              class="inline-action-bage iconfont icon-plus"
+              @tap="updateCommodityCount(commodity.shopId, commodity.id, commodity.count+1)"
+            ></text>
           </view>
         </view>
-      </view>
-      <view class="item" @click="toInfoPage('1')">
-        <view class="checkbox">
-          <checkbox />
-        </view>
-        <view class="commodity">
-          <view class="image-wrapper">
-            <img src="/static/images/fruits/5b790440N80765d11.jpg" alt />
-          </view>
-          <view class="content">
-            <span class="title">比利时精品金桔</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
-          </view>
-        </view>
-      </view>
-      <view class="item" @click="toInfoPage('1')">
-        <view class="checkbox">
-          <checkbox />
-        </view>
-        <view class="commodity">
-          <view class="image-wrapper">
-            <img src="/static/images/fruits/05d6ff83fd1cf326.jpg" alt />
-          </view>
-          <view class="content">
-            <span class="title">泰国精品车厘子</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
-          </view>
-        </view>
-      </view>
-      <view class="item" @click="toInfoPage('1')">
-        <view class="checkbox">
-          <checkbox />
-        </view>
-        <view class="commodity">
-          <view class="image-wrapper">
-            <img src="/static/images/fruits/5a30f676N29e74e73.jpg" alt />
-          </view>
-          <view class="content">
-            <span class="title">云南精品龙眼</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
-          </view>
-        </view>
-      </view>
-      <view class="item" @click="toInfoPage('1')">
-        <view class="checkbox">
-          <checkbox />
-        </view>
-        <view class="commodity">
-          <view class="image-wrapper">
-            <img src="/static/images/fruits/5b790440N80765d11.jpg" alt />
-          </view>
-          <view class="content">
-            <span class="title">比利时精品金桔</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
-          </view>
-        </view>
-      </view>
-      <view class="item" @click="toInfoPage('1')">
-        <view class="checkbox">
-          <checkbox />
-        </view>
-        <view class="commodity">
-          <view class="image-wrapper">
-            <img src="/static/images/fruits/05d6ff83fd1cf326.jpg" alt />
-          </view>
-          <view class="content">
-            <span class="title">泰国精品车厘子</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
-          </view>
-        </view>
-      </view>
-      <view class="item" @click="toInfoPage('1')">
-        <view class="checkbox">
-          <checkbox />
-        </view>
-        <view class="commodity">
-          <view class="image-wrapper">
-            <img src="/static/images/fruits/5a30f676N29e74e73.jpg" alt />
-          </view>
-          <view class="content">
-            <span class="title">云南精品龙眼</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
-          </view>
-        </view>
-      </view>
-      <view class="item" @click="toInfoPage('1')">
-        <view class="checkbox">
-          <checkbox />
-        </view>
-        <view class="commodity">
-          <view class="image-wrapper">
-            <img src="/static/images/fruits/5b790440N80765d11.jpg" alt />
-          </view>
-          <view class="content">
-            <span class="title">比利时精品金桔</span>
-            <span class="message">
-              <b>￥30.00/斤</b>
-              <br />源自泰国车厘子，酸酸甜甜非常好吃
-            </span>
-          </view>
-        </view>
-      </view>
+      </checkbox-group>
     </view>
     <view class="shopping-cart-action">
-      <button class="remove-btn">移出购物车</button>
+      <button class="remove-btn" @tap="removeCommodity">移出购物车</button>
       <button class="take-btn" @click="toMakeOrderPage">
-        <span class="iconfont icon-pay"></span>
-        <span style="margin-left: 5px;">去结算</span>
+        <text class="iconfont icon-pay"></text>
+        <text style="margin-left: 5px;">去结算</text>
       </button>
     </view>
   </view>
 </template>
 
 <script>
+import {
+  apiGetCurrentUserShoppingCartCommodityList,
+  apiBatchRemoveCommodityFromShoppingCart,
+  apiUpdateCommondityCountInShoppingCart
+} from "@/api/main";
 export default {
+  data() {
+    return {
+      page: 1,
+      commodityList: [],
+      selectCommodity: []
+    };
+  },
   mounted() {
+    this.getShoppingCart();
   },
   methods: {
-    toMakeOrderPage(){
+    onCommodityCheckChange(e) {
+      let selectList = [];
+      e.detail.value.forEach(checkValue => {
+        selectList.push(
+          this.commodityList.find(commodity => {
+            return commodity.id === parseInt(checkValue);
+          })
+        );
+      });
+      this.selectCommodity = selectList;
+    },
+    getShoppingCart() {
+      apiGetCurrentUserShoppingCartCommodityList(this.page).then(res => {
+        this.commodityList = res.records;
+      });
+    },
+    async removeCommodity() {
+      let putArr = [];
+      this.selectCommodity.forEach(commodity => {
+        putArr.push({
+          id: commodity.shopId,
+          commodityId: commodity.id
+        });
+      });
+      await apiBatchRemoveCommodityFromShoppingCart(putArr);
+      this.getShoppingCart();
+    },
+    updateCommodityCount(shopId, commodityId, count) {
+      apiUpdateCommondityCountInShoppingCart(shopId, commodityId, count).then(
+        () => {
+          this.getShoppingCart();
+        }
+      );
+    },
+    toMakeOrderPage() {
       uni.navigateTo({
         url: "/pages/order/index?type=make"
       });

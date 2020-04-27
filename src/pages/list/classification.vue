@@ -1,340 +1,113 @@
 <template>
   <view class="container">
     <view class="layout_list">
-      <view
-        class="item"
-        v-for="commodity in commodityList"
-        :key="commodity.id"
-        @click="toCommodityPage(commodity.id)"
-      >
-        <view class="commodity">
+      <view class="item" v-for="(commodity, index) in commodityList" :key="index">
+        <view class="commodity" @tap="toCommodityPage(commodity.id, commodity.name)">
           <view class="image-wrapper">
-            <img :src="commodity.imagePath" alt />
+            <img :src="commodity.imagePath + '/show_in_list.jpg'" alt />
           </view>
           <view class="content">
-            <span class="title">{{commodity.name}}</span>
-            <span class="message">
-              <b>{{commodity._showPrice}}</b>
+            <text class="title">{{commodity.name}}</text>
+            <text class="message">
+              <b>￥{{commodity.price}}·{{commodity.unit}}</b>
               <br />
-              <span class="bage red" v-for="tag in commodity.tags" :key="tag.id" style="margin-right: 5px;">{{tag.name}}</span>
-            </span>
+              <text
+                class="bage red"
+                v-for="tag in commodity.tags"
+                :key="tag.id"
+                style="margin-right: 5px;"
+              >{{tag.name}}</text>
+            </text>
           </view>
         </view>
-        <view class="actionbox">
-          <button class="push-cart-btn">
-            <span class="iconfont icon-trolley"></span>
+        <view class="actionbox" v-if="!shoppingCartRecord(commodity).number">
+          <button class="push-cart-btn" @tap="pushToShoppingCart(commodity.id)">
+            <text class="iconfont icon-trolley"></text>
           </button>
+        </view>
+        <view class="actionbox" v-else>
+          <text
+            class="inline-action-bage iconfont icon-minus"
+            @tap="updateCommodityCount(shoppingCartRecord(commodity).id, commodity.id, shoppingCartRecord(commodity).number-1)"
+          ></text>
+          <text class="inline-bage">{{shoppingCartRecord(commodity).number}}</text>
+          <text
+            class="inline-action-bage iconfont icon-plus"
+            @tap="updateCommodityCount(shoppingCartRecord(commodity).id, commodity.id, shoppingCartRecord(commodity).number+1)"
+          ></text>
         </view>
       </view>
     </view>
-    <index-shopping-cart />
+    <index-shopping-cart ref="indexShoppingCart" />
   </view>
 </template>
 
 <script>
+import {
+  apiSearchGoodsByType,
+  apiPushCommodityToShoppingCart,
+  apiUpdateCommondityCountInShoppingCart
+} from "@/api/main";
+import store from "@/store/index";
 import IndexShoppingCart from "../../components/indexShoppingCart";
 
 export default {
   components: { IndexShoppingCart },
+  props: ["id", "searchValue"],
   data() {
     return {
-      commodityList: [
-        {
-          id: 1,
-          name: "车厘子",
-          buyCount: 987,
-          price: 10,
-          oldPrice: 20,
-          showPrice: "￥{{price}}·约每斤",
-          _showPrice: "",
-          imagePath: "/static/images/fruits/05d6ff83fd1cf326.jpg",
-          tags: [
-            {
-              id: 1,
-              name: "热销"
-            },
-            {
-              id: 2,
-              name: "优惠"
-            },
-            {
-              id: 3,
-              name: "推荐"
-            }
-          ]
-        },
-        {
-          id: 2,
-          name: "香蕉",
-          buyCount: 876,
-          price: 10,
-          oldPrice: 20,
-          showPrice: "￥{{price}}·约每斤",
-          _showPrice: "",
-          imagePath: "/static/images/fruits/05d6ff83fd1cf326.jpg",
-          tags: [
-            {
-              id: 1,
-              name: "热销"
-            },
-            {
-              id: 2,
-              name: "优惠"
-            },
-            {
-              id: 3,
-              name: "推荐"
-            }
-          ]
-        },
-        {
-          id: 3,
-          name: "苹果",
-          buyCount: 765,
-          price: 10,
-          oldPrice: 20,
-          showPrice: "￥{{price}}·约每斤",
-          _showPrice: "",
-          imagePath: "/static/images/fruits/05d6ff83fd1cf326.jpg",
-          tags: [
-            {
-              id: 1,
-              name: "热销"
-            },
-            {
-              id: 2,
-              name: "优惠"
-            },
-            {
-              id: 3,
-              name: "推荐"
-            }
-          ]
-        },
-        {
-          id: 4,
-          name: "香梨",
-          buyCount: 654,
-          price: 10,
-          oldPrice: 20,
-          showPrice: "￥{{price}}·约每斤",
-          _showPrice: "",
-          imagePath: "/static/images/fruits/05d6ff83fd1cf326.jpg",
-          tags: [
-            {
-              id: 1,
-              name: "热销"
-            },
-            {
-              id: 2,
-              name: "优惠"
-            },
-            {
-              id: 3,
-              name: "推荐"
-            }
-          ]
-        },
-        {
-          id: 5,
-          name: "木瓜",
-          buyCount: 543,
-          price: 10,
-          oldPrice: 20,
-          showPrice: "￥{{price}}·约每斤",
-          _showPrice: "",
-          imagePath: "/static/images/fruits/05d6ff83fd1cf326.jpg",
-          tags: [
-            {
-              id: 1,
-              name: "热销"
-            },
-            {
-              id: 2,
-              name: "优惠"
-            },
-            {
-              id: 3,
-              name: "推荐"
-            }
-          ]
-        },
-        {
-          id: 6,
-          name: "哈密瓜",
-          buyCount: 432,
-          price: 10,
-          oldPrice: 20,
-          showPrice: "￥{{price}}·约每斤",
-          _showPrice: "",
-          imagePath: "/static/images/fruits/05d6ff83fd1cf326.jpg",
-          tags: [
-            {
-              id: 1,
-              name: "热销"
-            },
-            {
-              id: 2,
-              name: "优惠"
-            },
-            {
-              id: 3,
-              name: "推荐"
-            }
-          ]
-        },
-        {
-          id: 7,
-          name: "西瓜",
-          buyCount: 321,
-          price: 10,
-          oldPrice: 20,
-          showPrice: "￥{{price}}·约每斤",
-          _showPrice: "",
-          imagePath: "/static/images/fruits/05d6ff83fd1cf326.jpg",
-          tags: [
-            {
-              id: 1,
-              name: "热销"
-            },
-            {
-              id: 2,
-              name: "优惠"
-            },
-            {
-              id: 3,
-              name: "推荐"
-            }
-          ]
-        },
-        {
-          id: 8,
-          name: "桃子",
-          buyCount: 321,
-          price: 10,
-          oldPrice: 20,
-          showPrice: "￥{{price}}·约每斤",
-          _showPrice: "",
-          imagePath: "/static/images/fruits/05d6ff83fd1cf326.jpg",
-          tags: [
-            {
-              id: 1,
-              name: "热销"
-            },
-            {
-              id: 2,
-              name: "优惠"
-            },
-            {
-              id: 3,
-              name: "推荐"
-            }
-          ]
-        },
-        {
-          id: 9,
-          name: "橘子",
-          buyCount: 210,
-          price: 10,
-          oldPrice: 20,
-          showPrice: "￥{{price}}·约每斤",
-          _showPrice: "",
-          imagePath: "/static/images/fruits/05d6ff83fd1cf326.jpg",
-          tags: [
-            {
-              id: 1,
-              name: "热销"
-            },
-            {
-              id: 2,
-              name: "优惠"
-            },
-            {
-              id: 3,
-              name: "推荐"
-            }
-          ]
-        },
-        {
-          id: 10,
-          name: "橙子",
-          buyCount: 109,
-          price: 10,
-          oldPrice: 20,
-          showPrice: "￥{{price}}·约每斤",
-          _showPrice: "",
-          imagePath: "/static/images/fruits/05d6ff83fd1cf326.jpg",
-          tags: [
-            {
-              id: 1,
-              name: "热销"
-            },
-            {
-              id: 2,
-              name: "优惠"
-            },
-            {
-              id: 3,
-              name: "推荐"
-            }
-          ]
-        },
-        {
-          id: 11,
-          name: "葡萄",
-          buyCount: 98,
-          price: 10,
-          oldPrice: 20,
-          showPrice: "￥{{price}}·约每斤",
-          _showPrice: "",
-          imagePath: "/static/images/fruits/05d6ff83fd1cf326.jpg",
-          tags: [
-            {
-              id: 1,
-              name: "热销"
-            },
-            {
-              id: 2,
-              name: "优惠"
-            },
-            {
-              id: 3,
-              name: "推荐"
-            }
-          ]
-        }
-      ]
+      page: 1,
+      commodityList: []
     };
   },
+  computed: {
+    shoppingCartRecord() {
+      return commodity => {
+        if (
+          store.state.shoppingCartInfo &&
+          store.state.shoppingCartInfo.records
+        ) {
+          return (
+            store.state.shoppingCartInfo.records.find(
+              record => record.goodsId === commodity.id
+            ) || {}
+          );
+        } else {
+          return {};
+        }
+      };
+    }
+  },
+  watch: {
+    id(newValue, oldValue) {
+      this.getGoodList();
+    },
+    searchValue(newValue, oldValue) {
+      this.getGoodList();
+    }
+  },
   mounted() {
-    this.setShowPrice();
+    this.getGoodList();
   },
   methods: {
-    toCommodityPage(id) {
+    toCommodityPage(id, name) {
       uni.navigateTo({
-        url: "/pages/commodity/index?id=" + id
+        url: "/pages/commodity/index?type=common&id=" + id + "&name=" + name
       });
     },
-    setShowPrice() {
-      let commodityList = this.commodityList;
-      commodityList.map(commodity => {
-        let showPrice = "";
-        let beforeSplitList = commodity.showPrice.split("{{");
-        if (beforeSplitList.length <= 1) {
-          showPrice = commodity.showPrice;
-        } else {
-          beforeSplitList.forEach(beforeStr => {
-            let arterSplitList = beforeStr.split("}}");
-            if (arterSplitList.length <= 1) {
-              showPrice += beforeStr;
-            } else {
-              showPrice += commodity[arterSplitList[0]] + arterSplitList[1];
-            }
-          });
-        }
-        commodity._showPrice = showPrice;
+    getGoodList() {
+      apiSearchGoodsByType(this.page, this.id, this.searchValue).then(res => {
+        this.commodityList = res;
+        console.log(this.commodityList);
       });
-      this.commodityList = commodityList;
+    },
+    pushToShoppingCart(id) {
+      apiPushCommodityToShoppingCart(id, 1).then(() => {
+        this.$refs["indexShoppingCart"].refresh();
+      });
+    },
+    updateCommodityCount(shopId, commodityId, count) {
+      apiUpdateCommondityCountInShoppingCart(shopId, commodityId, count).then();
     }
   }
 };

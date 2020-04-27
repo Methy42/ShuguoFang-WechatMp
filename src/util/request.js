@@ -1,8 +1,10 @@
+const baseUrl = uni.system_config.baseUrl;
+
 const service = {
   mainApi: (option) => {
     return new Promise((resolve, reject) => {
       uni.request({
-        url: option.url,
+        url: baseUrl + option.url,
         method: option.method,
         data: option.data,
         success: (res) => {
