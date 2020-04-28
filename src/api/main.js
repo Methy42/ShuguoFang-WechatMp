@@ -306,6 +306,9 @@ export async function apiGetSpecialTopFiveList() {
       // data: queryData
     });
     result.data.data.forEach(async (special) => {
+      if([2,3].indexOf(special.id) != -1){
+        return;
+      }
       let goodList = [];
       const goodsResult = await request({
         url: '/promote/sales/detail',
@@ -316,7 +319,8 @@ export async function apiGetSpecialTopFiveList() {
       });
       goodsResult.data.data.forEach(good => {
         goodList.push({
-          id: good.id,
+          id: good.goodsId,
+          promoteSalesGoodsId: good.id,
           name: good.goodsName,
           price: good.price,
           unit: good.unit,
